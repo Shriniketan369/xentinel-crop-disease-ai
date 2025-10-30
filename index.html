@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xentinel Crop Health Detection</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #f8fafc;
+      text-align: center;
+      margin: 0;
+      padding: 40px;
+    }
+    .container {
+      background: beige;
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    h1 {
+      color: #38bdf8;
+      margin-bottom: 20px;
+    }
+    form {
+      margin-bottom: 30px;
+    }
+    input[type="file"] {
+      background:cadetblue;
+      border: none;
+      padding: 12px;
+      color: #f1f5f9;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button {
+      background: #38bdf8;
+      color: #0f172a;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #0ea5e9;
+    }
+    .result-box {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #0f172a;
+    }
+    .healthy { color: #22c55e; }
+    .diseased { color: #ef4444; }
+    .confidence-bar {
+      height: 20px;
+      width: 100%;
+      background: #334155;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .confidence-fill {
+      height: 100%;
+      background: #38bdf8;
+      width: 0%;
+      transition: width 1s ease;
+    }
+    p{
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style="color: black;">🍃Xentinel Crop Health Detection🍃</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" accept="image/*" required />
+      <button type="submit">Analyze</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+      <h2>Result: 
+        <span class="{{ 'healthy' if result == 'Healthy' else 'diseased' }}">
+          {{ result }}
+        </span>
+      </h2>
+      <p>Confidence: {{ (confidence * 100) | round(2) }}%</p>
+  <!--    <div class="confidence-bar">
+        <div class="confidence-fill" 
+             style="width: {{ (confidence * 100) | round(2) }}%;"></div>
+      </div>
+    </div>
+    {% endif %}
+    -->
+  </div>
+
+
+<p>Powered by XFoundra.Tech and Xentinel 2025 ©️</p>
+</body>
+</html>
